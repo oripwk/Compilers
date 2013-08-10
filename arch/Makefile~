@@ -1,0 +1,8 @@
+out : out.o
+	gcc -o -m32 out out.o
+
+out.o : t2.c
+	gcc -c -o t2.o t2.c
+
+clean : 
+	rm -f *.o

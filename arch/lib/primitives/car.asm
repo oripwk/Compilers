@@ -1,0 +1,7 @@
+CAR:
+	PUSH(FP);
+	MOV(FP, SP);
+	MOV(R0, FPARG(IMM(2)));
+	MOV(R0, INDD(R0, 1));
+	POP(FP);
+	RETURN;

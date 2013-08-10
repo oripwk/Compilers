@@ -1,0 +1,26 @@
+
+SYMBOL_STRING:
+	PUSH(FP);
+	MOV(FP, SP);
+	PUSH(R1);
+	
+	MOV(R1, FPARG(2));
+	MOV(R0, M(mem)[CTAB_START]);
+	
+SYMBOL_STRING_LOOP:
+	CMP(INDD(R1, 0), INDD(R0, 0));
+	JUMP_NE(SYMBOL_STRING_CONTINUTE_LOOP);
+	CMP(INDD(R1, 1), INDD(R0, 1));
+	JUMP_EQ(SYMBOL_STRING_FOUND);
+	
+SYMBOL_STRING_CONTINUTE_LOOP:
+	INCR(R0);
+	JUMP(SYMBOL_STRING_LOOP);
+	
+SYMBOL_STRING_FOUND:
+	MOV(R0, INDD(R0, 1)); // points to symbol in symbol table
+	MOV(R0, INDD(R0, 1)); // points to string in constant table
+	
+	POP(R1);
+	POP(FP);
+	RETURN;

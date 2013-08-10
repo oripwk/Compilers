@@ -1,0 +1,20 @@
+BIN_GT:
+	PUSH(FP);
+	MOV(FP, SP);
+	PUSH(R1);
+	
+	MOV(R0, FPARG(IMM(2)));
+	MOV(R1, FPARG(IMM(3)));
+	MOV(R0, INDD(R0, 1));
+	MOV(R1, INDD(R1, 1));
+	CMP(R0, R1);
+	JUMP_GT(BIN_GT_TRUE);
+	MOV(R0, IMM(12)) // false
+	JUMP(BIN_GT_EXIT);
+	BIN_GT_TRUE:
+	MOV(R0, IMM(14)) // true
+	BIN_GT_EXIT:
+	
+	POP(R1);
+	POP(FP);
+	RETURN;
